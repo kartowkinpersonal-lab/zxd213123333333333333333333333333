@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>KARTO Messenger</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    <!-- ============ ЭКРАН ЗАГРУЗКИ ============ -->
+    <div id="splash-screen" class="splash-screen">
+        <div class="splash-content">
+            <div class="splash-logo">
+                <div class="logo-k">K</div>
+                <div class="logo-particles">
+                    <span></span><span></span><span></span>
+                    <span></span><span></span><span></span>
+                </div>
+            </div>
+            <h1 class="splash-title">KARTO</h1>
+            <p class="splash-sub">Messenger</p>
+            <div class="splash-loader">
+                <div class="loader-bar"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============ РЕГИСТРАЦИЯ - ШАГ 1: НИК ============ -->
+    <div id="reg-step1" class="auth-screen hidden">
+        <div class="auth-container">
+            <div class="auth-logo">
+                <div class="logo-k small">K</div>
+                <h2>KARTO</h2>
+            </div>
+            <div class="auth-step-indicator">
+                <div class="step active">1</div>
+                <div class="step-line"></div>
+                <div class="step">2</div>
+                <div class="step-line"></div>
+                <div class="step">3</div>
+                <div class="step-line"></div>
+                <div class="step">4</div>
+            </div>
+            <h3 class="auth-title">Создайте никнейм</h3>
+            <p class="auth-desc">Выберите уникальное имя для вашего аккаунта</p>
+            <div class="input-group">
+                <i class="fas fa-user"></i>
+                <input type="text" id="reg-nickname" placeholder="Никнейм" maxlength="20" autocomplete="off">
+            </div>
+            <div id="nick-error" class="error-msg"></div>
+            <button id="btn-step1" class="btn-primary">Далее <i class="fas fa-arrow-right"></i></button>
+            <p class="auth-switch">Уже есть аккаунт? <a href="#" id="go-login-1">Войти</a></p>
+        </div>
+    </div>
+
+    <!-- ============ РЕГИСТРАЦИЯ - ШАГ 2: ID ============ -->
+    <div id="reg-step2" class="auth-screen hidden">
+        <div class="auth-container">
+            <div class="auth-logo">
+                <div class="logo-k small">K</div>
+                <h2>KARTO</h2>
+            </div>
+            <div class="auth-step-indicator">
+                <div class="step done"><i class="fas fa-check"></i></div>
+                <div class="step-line done"></div>
+                <div class="step active">2</div>
+                <div class="step-line"></div>
+                <div class="step">3</div>
+                <div class="step-line"></div>
+                <div class="step">4</div>
+            </div>
+            <h3 class="auth-title">Ваш уникальный ID</h3>
+            <p class="auth-desc">Этот ID будут использовать для добавления вас в друзья</p>
+            <div class="input-group">
+                <i class="fas fa-hashtag"></i>
+                <input type="text" id="reg-id" placeholder="Введите ID (например: karto#1234)" maxlength="30" autocomplete="off">
+            </div>
+            <div id="id-error" class="error-msg"></div>
+            <div class="btn-row">
+                <button id="btn-back2" class="btn-secondary"><i class="fas fa-arrow-left"></i></button>
+                <button id="btn-step2" class="btn-primary">Далее <i class="fas fa-arrow-right"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============ РЕГИСТРАЦИЯ - ШАГ 3: НОМЕР ============ -->
+    <div id="reg-step3" class="auth-screen hidden">
+        <div class="auth-container">
+            <div class="auth-logo">
+                <div class="logo-k small">K</div>
+                <h2>KARTO</h2>
+            </div>
+            <div class="auth-step-indicator">
+                <div class="step done"><i class="fas fa-check"></i></div>
+                <div class="step-line done"></div>
+                <div class="step done"><i class="fas fa-check"></i></div>
+                <div class="step-line done"></div>
+                <div class="step active">3</div>
+                <div class="step-line"></div>
+                <div class="step">4</div>
+            </div>
+            <h3 class="auth-title">Номер телефона</h3>
+            <p class="auth-desc">Для безопасности вашего аккаунта</p>
+            <div class="input-group">
+                <i class="fas fa-phone"></i>
+                <input type="tel" id="reg-phone" placeholder="+7 (999) 123-45-67" autocomplete="off">
+            </div>
+            <div id="phone-error" class="error-msg"></div>
+            <div class="btn-row">
+                <button id="btn-back3" class="btn-secondary"><i class="fas fa-arrow-left"></i></button>
+                <button id="btn-step3" class="btn-primary">Далее <i class="fas fa-arrow-right"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============ РЕГИСТРАЦИЯ - ШАГ 4: ПАРОЛЬ ============ -->
+    <div id="reg-step4" class="auth-screen hidden">
+        <div class="auth-container">
+            <div class="auth-logo">
+                <div class="logo-k small">K</div>
+                <h2>KARTO</h2>
+            </div>
+            <div class="auth-step-indicator">
+                <div class="step done"><i class="fas fa-check"></i></div>
+                <div class="step-line done"></div>
+                <div class="step done"><i class="fas fa-check"></i></div>
+                <div class="step-line done"></div>
+                <div class="step done"><i class="fas fa-check"></i></div>
+                <div class="step-line done"></div>
+                <div class="step active">4</div>
+            </div>
+            <h3 class="auth-title">Создайте пароль</h3>
+            <p class="auth-desc">Минимум 6 символов для защиты аккаунта</p>
+            <div class="input-group">
+                <i class="fas fa-lock"></i>
+                <input type="password" id="reg-password" placeholder="Пароль" autocomplete="off">
+                <button class="toggle-pass" id="toggle-pass1"><i class="fas fa-eye"></i></button>
+            </div>
+            <div class="input-group">
+                <i class="fas fa-lock"></i>
+                <input type="password" id="reg-password2" placeholder="Повторите пароль" autocomplete="off">
+                <button class="toggle-pass" id="toggle-pass2"><i class="fas fa-eye"></i></button>
+            </div>
+            <div class="password-strength">
+                <div class="strength-bar" id="strength-bar"></div>
+            </div>
+            <div id="pass-error" class="error-msg"></div>
+            <div class="btn-row">
+                <button id="btn-back4" class="btn-secondary"><i class="fas fa-arrow-left"></i></button>
+                <button id="btn-register" class="btn-primary">Создать аккаунт <i class="fas fa-rocket"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============ ЛОГИН ============ -->
+    <div id="login-screen" class="auth-screen hidden">
+        <div class="auth-container">
+            <div class="auth-logo">
+                <div class="logo-k small">K</div>
+                <h2>KARTO</h2>
+            </div>
+            <h3 class="auth-title">Добро пожаловать!</h3>
+            <p class="auth-desc">Войдите в свой аккаунт</p>
+            <div class="input-group">
+                <i class="fas fa-hashtag"></i>
+                <input type="text" id="login-id" placeholder="Ваш ID (karto#1234)" autocomplete="off">
+            </div>
+            <div class="input-group">
+                <i class="fas fa-lock"></i>
+                <input type="password" id="login-password" placeholder="Пароль" autocomplete="off">
+                <button class="toggle-pass" id="toggle-pass-login"><i class="fas fa-eye"></i></button>
+            </div>
+            <div id="login-error" class="error-msg"></div>
+            <button id="btn-login" class="btn-primary">Войти <i class="fas fa-sign-in-alt"></i></button>
+            <p class="auth-switch">Нет аккаунта? <a href="#" id="go-register">Создать</a></p>
+        </div>
+    </div>
+
+    <!-- ============ ОСНОВНОЙ МЕССЕНДЖЕР ============ -->
+    <div id="messenger" class="messenger hidden">
+        <!-- Сайдбар -->
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">
+                    <div class="logo-k tiny">K</div>
+                    <span>KARTO</span>
+                </div>
+                <div class="sidebar-actions">
+                    <button class="icon-btn" id="btn-new-chat" title="Новый чат"><i class="fas fa-edit"></i></button>
+                    <button class="icon-btn" id="btn-create-group" title="Создать группу"><i class="fas fa-users"></i></button>
+                </div>
+            </div>
+
+            <!-- Навигация -->
+            <div class="sidebar-nav">
+                <button class="nav-btn active" data-tab="chats">
+                    <i class="fas fa-comment-dots"></i>
+                    <span>Чаты</span>
+                    <div class="badge hidden" id="chats-badge">0</div>
+                </button>
+                <button class="nav-btn" data-tab="calls">
+                    <i class="fas fa-phone-alt"></i>
+                    <span>Звонки</span>
+                    <div class="badge hidden" id="calls-badge">0</div>
+                </button>
+                <button class="nav-btn" data-tab="contacts">
+                    <i class="fas fa-address-book"></i>
+                    <span>Контакты</span>
+                </button>
+            </div>
+
+            <!-- Поиск -->
+            <div class="sidebar-search">
+                <i class="fas fa-search"></i>
+                <input type="text" id="search-input" placeholder="Поиск...">
+            </div>
+
+            <!-- Список чатов -->
+            <div class="sidebar-content" id="sidebar-content">
+                <div id="chats-list" class="tab-content active">
+                    <div class="empty-state" id="empty-chats">
+                        <i class="fas fa-comment-slash"></i>
+                        <p>Нет чатов</p>
+                        <span>Добавьте друга по ID чтобы начать общение</span>
+                    </div>
+                </div>
+                <div id="calls-list" class="tab-content">
+                    <div class="empty-state" id="empty-calls">
+                        <i class="fas fa-phone-slash"></i>
+                        <p>Нет звонков</p>
+                        <span>История звонков появится здесь</span>
+                    </div>
+                </div>
+                <div id="contacts-list" class="tab-content">
+                    <div class="empty-state" id="empty-contacts">
+                        <i class="fas fa-user-slash"></i>
+                        <p>Нет контактов</p>
+                        <span>Добавьте друзей по их ID</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Профиль внизу -->
+            <div class="sidebar-profile" id="sidebar-profile">
+                <div class="profile-avatar" id="my-avatar">
+                    <img src="" alt="" id="my-avatar-img" class="hidden">
+                    <div class="avatar-placeholder" id="my-avatar-placeholder">U</div>
+                    <div class="online-dot"></div>
+                </div>
+                <div class="profile-info">
+                    <span class="profile-name" id="my-name">User</span>
+                    <span class="profile-id" id="my-id-display">#0000</span>
+                </div>
+                <button class="icon-btn" id="btn-settings" title="Настройки"><i class="fas fa-cog"></i></button>
+            </div>
+        </div>
+
+        <!-- Основная область -->
+        <div class="main-area" id="main-area">
+            <!-- Пустое состояние -->
+            <div class="welcome-screen" id="welcome-screen">
+                <div class="welcome-content">
+                    <div class="logo-k big">K</div>
+                    <h2>Добро пожаловать в KARTO</h2>
+                    <p>Выберите чат или создайте новый</p>
+                    <div class="welcome-actions">
+                        <button class="btn-primary" id="welcome-new-chat"><i class="fas fa-plus"></i> Начать чат</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Область чата -->
+            <div class="chat-area hidden" id="chat-area">
+                <div class="chat-header" id="chat-header">
+                    <button class="icon-btn mobile-back" id="btn-back-chat"><i class="fas fa-arrow-left"></i></button>
+                    <div class="chat-header-avatar" id="chat-avatar">
+                        <div class="avatar-placeholder">U</div>
+                    </div>
+                    <div class="chat-header-info">
+                        <span class="chat-name" id="chat-name">Имя</span>
+                        <span class="chat-status" id="chat-status">Онлайн</span>
+                    </div>
+                    <div class="chat-header-actions">
+                        <button class="icon-btn" id="btn-voice-call" title="Аудио звонок"><i class="fas fa-phone-alt"></i></button>
+                        <button class="icon-btn" id="btn-video-call" title="Видео звонок"><i class="fas fa-video"></i></button>
+                        <button class="icon-btn" id="btn-chat-info" title="Информация"><i class="fas fa-info-circle"></i></button>
+                    </div>
+                </div>
+
+                <div class="chat-messages" id="chat-messages">
+                </div>
+
+                <div class="chat-input-area" id="chat-input-area">
+                    <div class="typing-indicator hidden" id="typing-indicator">
+                        <span></span> печатает...
+                    </div>
+                    <div class="input-row">
+                        <button class="icon-btn" id="btn-attach" title="Прикрепить"><i class="fas fa-plus-circle"></i></button>
+                        <button class="icon-btn" id="btn-gif" title="GIF"><i class="fas fa-fire"></i></button>
+                        <div class="message-input-wrap">
+                            <textarea id="message-input" placeholder="Написать сообщение..." rows="1"></textarea>
+                        </div>
+                        <button class="icon-btn" id="btn-emoji" title="Эмодзи"><i class="fas fa-smile"></i></button>
+                        <button class="send-btn" id="btn-send"><i class="fas fa-paper-plane"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============ МОДАЛЬНЫЕ ОКНА ============ -->
+
+    <!-- Добавить друга -->
+    <div class="modal hidden" id="modal-add-friend">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-user-plus"></i> Добавить друга</h3>
+                <button class="modal-close"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <p>Введите ID пользователя для добавления</p>
+                <div class="input-group">
+                    <i class="fas fa-hashtag"></i>
+                    <input type="text" id="add-friend-id" placeholder="username#1234" autocomplete="off">
+                </div>
+                <div id="add-friend-error" class="error-msg"></div>
+                <div id="add-friend-success" class="success-msg hidden"></div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary modal-cancel">Отмена</button>
+                <button class="btn-primary" id="btn-add-friend-confirm">Добавить</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Создать группу -->
+    <div class="modal hidden" id="modal-create-group">
+        <div class="modal-overlay"></div>
+        <div class="modal-content modal-large">
+            <div class="modal-header">
+                <h3><i class="fas fa-users"></i> Создать группу</h3>
+                <button class="modal-close"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="group-create-section">
+                    <div class="group-photo-upload" id="group-photo-upload">
+                        <i class="fas fa-camera"></i>
+                        <span>Фото группы</span>
+                        <input type="file" id="group-photo-input" accept="image/*" class="hidden">
+                        <img src="" alt="" id="group-photo-preview" class="hidden">
+                    </div>
+                    <div class="input-group">
+                        <i class="fas fa-pen"></i>
+                        <input type="text" id="group-name-input" placeholder="Название группы" maxlength="30">
+                    </div>
+                </div>
+                <h4>Добавить участников</h4>
+                <div class="members-select" id="members-select">
+                    <p class="no-contacts-msg">Добавьте контакты чтобы приглашать в группу</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary modal-cancel">Отмена</button>
+                <button class="btn-primary" id="btn-create-group-confirm">Создать</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Настройки -->
+    <div class="modal hidden" id="modal-settings">
+        <div class="modal-overlay"></div>
+        <div class="modal-content modal-large">
+            <div class="modal-header">
+                <h3><i class="fas fa-cog"></i> Настройки</h3>
+                <button class="modal-close"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body settings-body">
+                <div class="settings-section">
+                    <h4>Профиль</h4>
+                    <div class="profile-edit">
+                        <div class="profile-photo-edit" id="profile-photo-edit">
+                            <div class="avatar-large" id="settings-avatar">
+                                <div class="avatar-placeholder large" id="settings-avatar-placeholder">U</div>
+                                <img src="" alt="" id="settings-avatar-img" class="hidden">
+                            </div>
+                            <div class="photo-edit-overlay">
+                                <i class="fas fa-camera"></i>
+                            </div>
+                            <input type="file" id="profile-photo-input" accept="image/*" class="hidden">
+                        </div>
+                        <div class="profile-fields">
+                            <div class="input-group">
+                                <i class="fas fa-user"></i>
+                                <input type="text" id="settings-nickname" placeholder="Никнейм">
+                            </div>
+                            <div class="input-group">
+                                <i class="fas fa-info-circle"></i>
+                                <textarea id="settings-bio" placeholder="Описание (о себе)" maxlength="150" rows="3"></textarea>
+                            </div>
+                            <div class="input-group readonly">
+                                <i class="fas fa-hashtag"></i>
+                                <input type="text" id="settings-id" readonly>
+                                <button class="icon-btn copy-btn" id="copy-id-btn" title="Копировать"><i class="fas fa-copy"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn-primary" id="btn-save-profile">Сохранить профиль</button>
+                </div>
+
+                <div class="settings-section">
+                    <h4>Тема оформления</h4>
+                    <div class="theme-options">
+                        <div class="theme-option active" data-theme="dark">
+                            <div class="theme-preview dark-preview"></div>
+                            <span>Тёмная</span>
+                        </div>
+                        <div class="theme-option" data-theme="light">
+                            <div class="theme-preview light-preview"></div>
+                            <span>Светлая</span>
+                        </div>
+                        <div class="theme-option" data-theme="purple">
+                            <div class="theme-preview purple-preview"></div>
+                            <span>Фиолетовая</span>
+                        </div>
+                        <div class="theme-option" data-theme="blue">
+                            <div class="theme-preview blue-preview"></div>
+                            <span>Синяя</span>
+                        </div>
+                        <div class="theme-option" data-theme="green">
+                            <div class="theme-preview green-preview"></div>
+                            <span>Зелёная</span>
+                        </div>
+                        <div class="theme-option" data-theme="red">
+                            <div class="theme-preview red-preview"></div>
+                            <span>Красная</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="settings-section">
+                    <h4>Акцентный цвет чата</h4>
+                    <div class="accent-options">
+                        <div class="accent-option" data-accent="#7c5cfc" style="background:#7c5cfc"></div>
+                        <div class="accent-option" data-accent="#5865F2" style="background:#5865F2"></div>
+                        <div class="accent-option" data-accent="#3ba55d" style="background:#3ba55d"></div>
+                        <div class="accent-option" data-accent="#ed4245" style="background:#ed4245"></div>
+                        <div class="accent-option" data-accent="#fee75c" style="background:#fee75c"></div>
+                        <div class="accent-option" data-accent="#eb459e" style="background:#eb459e"></div>
+                        <div class="accent-option" data-accent="#57F287" style="background:#57F287"></div>
+                        <div class="accent-option active" data-accent="#5865F2" style="background:#5865F2"></div>
+                    </div>
+                </div>
+
+                <div class="settings-section danger-zone">
+                    <h4>Аккаунт</h4>
+                    <button class="btn-danger" id="btn-logout"><i class="fas fa-sign-out-alt"></i> Выйти из аккаунта</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Профиль пользователя -->
+    <div class="modal hidden" id="modal-user-profile">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-user"></i> Профиль</h3>
+                <button class="modal-close"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body user-profile-body">
+                <div class="user-profile-banner"></div>
+                <div class="user-profile-avatar" id="up-avatar">
+                    <div class="avatar-placeholder large">U</div>
+                </div>
+                <h3 id="up-name">Пользователь</h3>
+                <span class="user-profile-id" id="up-id">#0000</span>
+                <p class="user-profile-bio" id="up-bio">Нет описания</p>
+                <div class="user-profile-actions">
+                    <button class="btn-primary" id="up-message"><i class="fas fa-comment"></i> Сообщение</button>
+                    <button class="btn-secondary" id="up-call"><i class="fas fa-phone"></i> Позвонить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- GIF Picker -->
+    <div class="modal hidden" id="modal-gif">
+        <div class="modal-overlay"></div>
+        <div class="modal-content modal-large">
+            <div class="modal-header">
+                <h3><i class="fas fa-fire"></i> GIF</h3>
+                <button class="modal-close"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="input-group">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="gif-search" placeholder="Поиск GIF..." autocomplete="off">
+                </div>
+                <div class="gif-grid" id="gif-grid">
+                    <div class="gif-loading">Введите запрос для поиска GIF</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Прикрепить файл -->
+    <div class="modal hidden" id="modal-attach">
+        <div class="modal-overlay"></div>
+        <div class="modal-content modal-small">
+            <div class="modal-header">
+                <h3><i class="fas fa-paperclip"></i> Прикрепить</h3>
+                <button class="modal-close"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body attach-body">
+                <label class="attach-option" id="attach-photo">
+                    <i class="fas fa-image"></i>
+                    <span>Фото</span>
+                    <input type="file" accept="image/*" class="hidden" id="attach-photo-input">
+                </label>
+                <label class="attach-option" id="attach-video">
+                    <i class="fas fa-video"></i>
+                    <span>Видео</span>
+                    <input type="file" accept="video/*" class="hidden" id="attach-video-input">
+                </label>
+                <label class="attach-option" id="attach-file">
+                    <i class="fas fa-file"></i>
+                    <span>Файл</span>
+                    <input type="file" class="hidden" id="attach-file-input">
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <!-- Emoji Picker -->
+    <div class="emoji-picker hidden" id="emoji-picker">
+        <div class="emoji-grid" id="emoji-grid"></div>
+    </div>
+
+    <!-- ============ ЗВОНОК ============ -->
+    <div class="call-screen hidden" id="call-screen">
+        <div class="call-bg"></div>
+        <div class="call-content">
+            <div class="call-avatar" id="call-avatar">
+                <div class="avatar-placeholder huge">U</div>
+                <div class="call-pulse"></div>
+            </div>
+            <h2 class="call-name" id="call-name">Пользователь</h2>
+            <p class="call-status-text" id="call-status-text">Вызов...</p>
+            <div class="call-timer hidden" id="call-timer">00:00</div>
+
+            <!-- Видео контейнеры -->
+            <div class="call-video-container hidden" id="call-video-container">
+                <video id="remote-video" autoplay playsinline></video>
+                <video id="local-video" autoplay playsinline muted class="local-video"></video>
+            </div>
+
+            <div class="call-controls" id="call-controls">
+                <button class="call-btn" id="call-mute" title="Мут">
+                    <i class="fas fa-microphone"></i>
+                </button>
+                <button class="call-btn" id="call-video-toggle" title="Видео">
+                    <i class="fas fa-video"></i>
+                </button>
+                <button class="call-btn end-call" id="call-end" title="Сбросить">
+                    <i class="fas fa-phone-slash"></i>
+                </button>
+            </div>
+
+            <!-- Входящий звонок -->
+            <div class="call-incoming hidden" id="call-incoming">
+                <button class="call-btn accept-call" id="call-accept">
+                    <i class="fas fa-phone"></i>
+                </button>
+                <button class="call-btn end-call" id="call-decline">
+                    <i class="fas fa-phone-slash"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Уведомления -->
+    <div class="notifications" id="notifications"></div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
